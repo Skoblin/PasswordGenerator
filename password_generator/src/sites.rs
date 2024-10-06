@@ -7,7 +7,6 @@ pub struct PasswordStructure {
     pub special_char: u8,
 }
 
-
 pub fn vk() -> PasswordStructure {
     let long: usize = 8;
     let register_up: u8 = 1;

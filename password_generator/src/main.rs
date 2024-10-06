@@ -11,6 +11,7 @@ fn main() {
         Some(password) => println!("{}Ваш пароль: {}", color::Fg(color::Green), password),
         None => println!("{}!!!ОШИБКА!!!", color::Fg(color::Red)),
     }
+
 }
 
 //Функция создания пароля
@@ -30,6 +31,7 @@ fn creating_password(long: usize) -> String {
 //Функция проверки пароля
 fn password_verification(long: usize, register_up: u8, register_low: u8, numbers: u8, special_char: u8, password: &str) -> bool {
     matches!((checking_length(long, password), checking_register(long, register_up, register_low, password), checking_numbers(long, numbers, password), checking_special_char(special_char, password)), (true, true, true, true))
+
 }
 
 //Проверка длинны
@@ -38,6 +40,7 @@ fn checking_length(long: usize, password: &str) -> bool {
         return true;
     }
     false
+
 }
 
 //Проверка маленьких и больших букв
@@ -66,7 +69,6 @@ fn checking_numbers(long: usize,numbers: u8, password: &str) -> bool {
     }
     quantity_numbers >= numbers 
   
-
 }
 
 //Проверка спец. символов
@@ -81,6 +83,7 @@ fn checking_special_char(special_char: u8, password: &str) -> bool {
         }
     }
     quantity_special_char >= special_char
+
 }
 
 //Выбор критериев пароля
@@ -102,7 +105,6 @@ fn sites_standards() -> Option<(usize, u8, u8, u8, u8)> {
             } 
     }
 
-
 }
 
 //Создание пароля со всеми проверками
@@ -112,11 +114,11 @@ fn verified_password() -> Option<String> {
         Some((long, register_up, register_low, numbers, special_char)) => {
 
             let mut password = creating_password(long);
-            let mut value = password_verification(long, register_up, register_low, numbers, special_char, &password.clone());
-            if !value {
-                while  !value {
+            let mut verification = password_verification(long, register_up, register_low, numbers, special_char, &password.clone());
+            if !verification {
+                while  !verification {
                     password = creating_password(long);
-                    value = password_verification(long, register_up, register_low, numbers, special_char, &password.clone());        
+                    verification = password_verification(long, register_up, register_low, numbers, special_char, &password.clone());        
                 }
             }
             Some(password)
@@ -125,6 +127,7 @@ fn verified_password() -> Option<String> {
         None => None,
         
     }
+
 }
 
 
