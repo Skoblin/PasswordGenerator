@@ -3,7 +3,7 @@ mod sites;
 use termion::color;
 use std::io::{self};
 use rand::seq::IteratorRandom;
-use sites::{instagram, vk, default};
+use sites::{vk, ok, default};
 
 fn main() {
     let password: Option<_> =  verified_password();
@@ -94,7 +94,7 @@ fn sites_standards() -> Option<(usize, u8, u8, u8, u8)> {
 
         match site_name.as_str().trim() {
             "1" => Some((vk().long, vk().register_up, vk().register_low, vk().numbers, vk().special_char)),
-            "2" => Some((instagram().long, vk().register_up, instagram().register_low, instagram().numbers, instagram().special_char)),
+            "2" => Some((ok().long, vk().register_up, ok().register_low, ok().numbers, ok().special_char)),
             "3" => Some((default().long, default().register_up, default().register_low, default().numbers, default().special_char)),
             _ => {
                 println!("\n{}Вы ввели неверное значение! Мы создадим пароль по дефольтным значениям.\n", color::Fg(color::Red));
@@ -115,8 +115,8 @@ fn verified_password() -> Option<String> {
             let mut value = password_verification(long, register_up, register_low, numbers, special_char, &password.clone());
             if !value {
                 while  !value {
-                    password = creating_password(6);
-                    value = password_verification(6, 2, 1, 2, 1, &password.clone());        
+                    password = creating_password(long);
+                    value = password_verification(long, register_up, register_low, numbers, special_char, &password.clone());        
                 }
             }
             Some(password)

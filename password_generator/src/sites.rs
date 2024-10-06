@@ -17,12 +17,12 @@ pub fn vk() -> PasswordStructure {
     PasswordStructure {long, register_up, register_low, numbers, special_char}
 }
 
-pub fn instagram() -> PasswordStructure {
-    let long: usize = 6;
+pub fn ok() -> PasswordStructure {
+    let long: usize = 12;
     let register_up: u8 = 1;
     let register_low: u8 = 1;
     let numbers: u8 = 1;
-    let special_char: u8 = 2;
+    let special_char: u8 = 1;
     PasswordStructure {long, register_up, register_low, numbers, special_char}
 }
 
