@@ -91,7 +91,7 @@ fn sites_standards() -> Option<(usize, u8, u8, u8, u8)> {
 
     let mut site_name = String::new();
 
-    println!("\nВыбирете сайт, для которого хотите сгенерировать пароль(введите цифру): \n1. VK \n2. Instagram \n3. Стандартный пароль\n");
+    println!("\nВыбирете сайт, для которого хотите сгенерировать пароль(введите цифру): \n1. VK \n2. OK \n3. Стандартный пароль\n");
 
     let _ = io::stdin().read_line( &mut site_name);
 
