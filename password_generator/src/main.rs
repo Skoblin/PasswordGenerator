@@ -20,7 +20,7 @@ fn creating_password(long: usize) -> String {
     let mut password = String::with_capacity(long);
 
     while password.len() != long {
-        password.push(symbolss.chars().choose(&mut rng).unwrap());
+        password.push(symbolss.chars().choose(&mut rng).expect("ОШИБКА"));
     }
     password
 }
