@@ -15,9 +15,9 @@ fn main() {
 
 //Функция создания пароля
 fn creating_password(long: usize) -> String {
-    let mut rng = rand::thread_rng();
-    let symbolss = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%&*;:?_-";
-    let mut password = String::with_capacity(long);
+    let mut rng: rand::prelude::ThreadRng = rand::thread_rng();
+    let symbolss: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890!@#$%&*;:?_-";
+    let mut password: String = String::with_capacity(long);
 
     while password.len() != long {
         password.push(symbolss.chars().choose(&mut rng).expect("ОШИБКА"));
@@ -70,7 +70,7 @@ fn checking_register(long: usize, register_up: u8, register_low: u8, password: &
 
 //Проверка цифр
 fn checking_numbers(long: usize, numbers: u8, password: &str) -> bool {
-    let mut quantity_numbers = 0;
+    let mut quantity_numbers: u8 = 0;
     for i in 0..long {
         if password.as_bytes()[i].is_ascii_digit() {
             quantity_numbers += 1;
@@ -95,7 +95,7 @@ fn checking_special_char(special_char: u8, password: &str) -> bool {
 
 //Выбор критериев пароля
 fn sites_standards() -> Option<(usize, u8, u8, u8, u8)> {
-    let mut site_name = String::new();
+    let mut site_name: String = String::new();
 
     println!("\nВыбирете сайт, для которого хотите сгенерировать пароль(введите цифру): \n1. VK \n2. OK \n3. Стандартный пароль\n");
 
@@ -111,7 +111,7 @@ fn sites_standards() -> Option<(usize, u8, u8, u8, u8)> {
         )),
         "2" => Some((
             ok().long,
-            vk().register_up,
+            ok().register_up,
             ok().register_low,
             ok().numbers,
             ok().special_char,
@@ -141,11 +141,11 @@ fn sites_standards() -> Option<(usize, u8, u8, u8, u8)> {
 
 //Создание пароля со всеми проверками
 fn verified_password() -> Option<String> {
-    let site_values = sites_standards();
+    let site_values: Option<(usize, u8, u8, u8, u8)> = sites_standards();
     match site_values {
         Some((long, register_up, register_low, numbers, special_char)) => {
-            let mut password = creating_password(long);
-            let mut verification = password_verification(
+            let mut password: String = creating_password(long);
+            let mut verification: bool = password_verification(
                 long,
                 register_up,
                 register_low,
